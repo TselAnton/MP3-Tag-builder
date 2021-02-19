@@ -1,13 +1,17 @@
 import androidx.compose.desktop.Window
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.IntSize
 import view.aboutDialog
-import view.leftPanel
+import view.filesTableBox
+import view.infoPanel
 import view.windowMenuBar
 
 private const val TITLE = "MP3 Tag Builder"
-private const val MIN_WIDTH = 1400
+private const val MIN_WIDTH = 900
 private const val MIN_HEIGHT = 600
 
 val aboutModalFlag: MutableState<Boolean> = mutableStateOf(false)
@@ -19,10 +23,12 @@ fun main() = Window(
     menuBar = windowMenuBar(aboutModalFlag),
 ) {
 
-
     if (aboutModalFlag.value) {
         aboutDialog(aboutModalFlag)
     }
 
-    leftPanel()
+    Row(modifier = Modifier.fillMaxSize()) {
+        infoPanel()
+        filesTableBox()
+    }
 }
