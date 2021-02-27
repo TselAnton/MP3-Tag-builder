@@ -18,6 +18,7 @@ repositories {
 dependencies {
     implementation(compose.desktop.currentOs)
     implementation("junit:junit:4.12")
+    implementation("com.google.code.gson:gson:2.8.2")
     testImplementation(kotlin("test-junit"))
 }
 

@@ -28,7 +28,7 @@ fun main() = Window(
     }
 
     Row(modifier = Modifier.fillMaxSize()) {
-        infoPanel()
+        //todo: add left panel later
         filesTableBox()
     }
 }
