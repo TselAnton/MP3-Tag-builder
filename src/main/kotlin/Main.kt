@@ -7,7 +7,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.IntSize
 import view.aboutDialog
 import view.filesTableBox
-import view.infoPanel
 import view.windowMenuBar
 
 private const val TITLE = "MP3 Tag Builder"
