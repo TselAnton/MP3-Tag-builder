@@ -1,6 +1,7 @@
 package config
 
 import com.google.gson.Gson
+import utils.ROOT_DIR
 import java.io.File
 import java.nio.file.Paths
 
@@ -29,35 +30,49 @@ data class AppSettings (
 
     fun fromPathUp(): String {
         this.fromFolderPath = upPath(fromFolderPath)
+        this.save(this)
         return fromFolderPath
     }
 
     fun toPathUp(): String {
         toFolderPath = upPath(toFolderPath)
+        this.save(this)
         return toFolderPath
     }
 
     fun fromPathDown(path: String): String {
         fromFolderPath = downPath(fromFolderPath, path)
+        this.save(this)
         return fromFolderPath
     }
 
     fun toPathDown(path: String): String {
         toFolderPath = downPath(toFolderPath, path)
+        this.save(this)
         return toFolderPath
     }
 
     private fun downPath(path: String, to: String): String {
+        if (path == ROOT_DIR) {
+            return to
+        }
         return if (path.endsWith("\\")) path + to else path + "\\" + to
     }
 
     private fun upPath(path: String): String {
-        return if (path.split("\\").size > 2) {
+        val pathSplit = path.split("\\")
+
+        if (pathSplit.size > 1) {
+            if (pathSplit.size == 2 && pathSplit[1].isBlank()) {
+                return ROOT_DIR
+            } else if (pathSplit.size == 2 && pathSplit[1].isNotBlank()) {
+                val index: Int = path.indexOfLast { '\\' == it }
+                return if (index != -1) path.substring(0, index + 1) else path
+            }
             val index: Int = path.indexOfLast { '\\' == it }
-            if (index != -1) path.substring(0, index) else path
+            return if (index != -1) path.substring(0, index) else path
         } else {
-            val index: Int = path.indexOfLast { '\\' == it }
-            if (index != -1) path.substring(0, index + 1) else path
+            return ROOT_DIR
         }
     }
 
