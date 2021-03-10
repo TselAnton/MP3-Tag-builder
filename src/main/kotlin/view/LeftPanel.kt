@@ -31,5 +31,10 @@ fun infoPanel() = Column (modifier = Modifier
 //
 //        Text("Photo")
 //        Text("Right")
+
+//                CoilImage(
+//                    data = "https://exampleimage.com/image.png",
+//                    contentDescription = "description of the image"
+//                )
     }
 }
